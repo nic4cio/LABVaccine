@@ -28,7 +28,7 @@ public class Cliente extends Pessoa {
 
     @Column
     @Temporal(TemporalType.DATE)
-    private Date validateCarteiraConvenio;
+    private Date validadeCarteiraConvenio;
 
     @ManyToOne
     @JoinColumn(name = "endereco_id")
