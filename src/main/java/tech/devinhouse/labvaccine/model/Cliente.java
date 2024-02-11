@@ -1,5 +1,6 @@
 package tech.devinhouse.labvaccine.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -35,7 +36,8 @@ public class Cliente extends Pessoa {
     @JoinColumn(name = "endereco_id")
     private Endereco endereco;
 
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "cliente")
+    @JsonIgnore
     private List<AdministracaoVacina> administracaoVacinas;
 
     public List<AdministracaoVacina> getVacinas() {

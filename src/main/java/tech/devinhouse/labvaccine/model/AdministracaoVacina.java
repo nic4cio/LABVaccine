@@ -2,6 +2,7 @@ package tech.devinhouse.labvaccine.model;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,7 +18,7 @@ public class AdministracaoVacina {
     private Long id;
 
     @Column(nullable = false)
-    private String nomeVacine;
+    private String nomeVacina;
 
     @Column(nullable = false)
     private LocalDateTime dataHoraAdministracao;
@@ -33,7 +34,8 @@ public class AdministracaoVacina {
     private String observacoes;
 
     @ManyToOne
-    @JoinColumn(name = "cliente_id", nullable = false)
+    @JoinColumn(name = "cliente_id")
+    @JsonIgnore
     private Cliente cliente;
 
     @ManyToOne
