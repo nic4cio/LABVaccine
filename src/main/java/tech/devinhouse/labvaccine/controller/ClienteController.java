@@ -35,6 +35,16 @@ public class ClienteController {
         }
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<?> buscarClientePorId(@PathVariable("id") Long id) {
+        try {
+            Cliente cliente = clienteService.buscarClientePorId(id);
+            return ResponseEntity.ok(cliente);
+        } catch (ClienteNaoEncontradoException ex) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+        }
+    }
+
 
     @PostMapping
     public ResponseEntity<?> cadastrarCliente(@RequestBody ClienteDTO clienteDTO) {

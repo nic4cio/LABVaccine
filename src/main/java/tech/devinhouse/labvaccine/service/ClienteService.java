@@ -24,6 +24,11 @@ public class ClienteService {
         return clienteRepository.findAll();
     }
 
+    public Cliente buscarClientePorId(Long id) {
+        return clienteRepository.findById(id)
+                .orElseThrow(() -> new ClienteNaoEncontradoException("Cliente não encontrado com o ID: " + id));
+    }
+
     public Cliente cadastrarCliente(ClienteDTO clienteDTO) {
         if (clienteRepository.existsByCpf(clienteDTO.getCpf())) {
             throw new CPFJaCadastradoException("CPF já cadastrado no sistema: " + clienteDTO.getCpf());
