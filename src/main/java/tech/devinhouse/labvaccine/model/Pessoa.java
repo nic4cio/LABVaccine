@@ -16,31 +16,31 @@ public class Pessoa {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column
     private String nomeCompleto;
 
-    @Column(nullable = false)
+    @Column
     private String genero;
 
-    @Column(nullable = false)
+    @Column
     @Temporal(TemporalType.DATE)
     private Date dataNascimento;
 
-    @Column(nullable = false, unique = true)
+    @Column(unique = true)
     private String cpf;
 
-    @Column(nullable = false, unique = true)
+    @Column(unique = true)
     private String rg;
 
-    @Column(nullable = false)
+    @Column
     private EstadoCivil estadoCivil;
 
-    @Column(nullable = false)
+    @Column
     private String telefone;
 
-    @Column(nullable = false, unique = true)
+    @Column(unique = true)
     private String email;
 
-    @Column(nullable = false)
+    @Column
     private String naturalidade;
 }

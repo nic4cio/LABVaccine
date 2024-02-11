@@ -14,13 +14,13 @@ import java.util.Date;
 @Entity
 public class Usuario extends Pessoa {
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = true,unique = true)
     private String crfUf;
 
-    @Column(nullable = false)
+    @Column
     @Temporal(TemporalType.DATE)
     private Date dataFormacao;
 
-    @Column(nullable = false)
+    @Column
     private String senha;
 }
