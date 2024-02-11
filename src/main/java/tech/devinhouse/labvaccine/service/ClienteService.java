@@ -49,6 +49,17 @@ public class ClienteService {
         return clienteRepository.save(clienteExistente);
     }
 
+    public void excluirCliente(Long id) {
+        Cliente cliente = clienteRepository.findById(id)
+                .orElseThrow(() -> new ClienteNaoEncontradoException("Cliente não encontrado com o ID: " + id));
+
+        if (cliente.getVacinas().isEmpty()) {
+            clienteRepository.delete(cliente);
+        } else {
+            throw new ClienteComVacinasCadastradasException("Não é possível excluir um cliente com vacinas cadastradas.");
+        }
+    }
+
     private void preencherClienteComDTO(Cliente cliente, ClienteDTO clienteDTO) {
         cliente.setNomeCompleto(clienteDTO.getNomeCompleto());
         cliente.setGenero(clienteDTO.getGenero());

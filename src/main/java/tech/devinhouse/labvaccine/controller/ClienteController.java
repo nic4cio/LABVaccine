@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import tech.devinhouse.labvaccine.dto.ClienteDTO;
 import tech.devinhouse.labvaccine.dto.ClienteUpdateDTO;
 import tech.devinhouse.labvaccine.model.Cliente;
+import tech.devinhouse.labvaccine.service.ClienteComVacinasCadastradasException;
 import tech.devinhouse.labvaccine.service.ClienteNaoEncontradoException;
 import tech.devinhouse.labvaccine.service.ClienteService;
 import tech.devinhouse.labvaccine.service.CPFJaCadastradoException;
@@ -67,6 +68,20 @@ public class ClienteController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
         } catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao atualizar cliente: " + ex.getMessage());
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> excluirCliente(@PathVariable("id") Long id) {
+        try {
+            clienteService.excluirCliente(id);
+            return ResponseEntity.noContent().build();
+        } catch (ClienteComVacinasCadastradasException ex) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+        } catch (ClienteNaoEncontradoException ex) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao excluir cliente: " + ex.getMessage());
         }
     }
 

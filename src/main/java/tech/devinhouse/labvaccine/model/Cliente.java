@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import java.util.Date;
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -33,4 +34,15 @@ public class Cliente extends Pessoa {
     @ManyToOne
     @JoinColumn(name = "endereco_id")
     private Endereco endereco;
+
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+    private List<AdministracaoVacina> administracaoVacinas;
+
+    public List<AdministracaoVacina> getVacinas() {
+        return administracaoVacinas;
+    }
+
+    public void setVacinas(List<AdministracaoVacina> administracoesVacina) {
+        this.administracaoVacinas = administracoesVacina;
+    }
 }
