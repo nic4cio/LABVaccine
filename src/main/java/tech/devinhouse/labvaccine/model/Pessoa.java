@@ -1,18 +1,16 @@
 package tech.devinhouse.labvaccine.model;
 
 import jakarta.persistence.*;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.util.Date;
-
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Pessoa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
