@@ -25,6 +25,15 @@ public class ClienteService {
         return clienteRepository.save(cliente);
     }
 
+    public Cliente atualizarCliente(Long id, ClienteUpdateDTO clienteUpdateDTO) {
+        Cliente clienteExistente = clienteRepository.findById(id)
+                .orElseThrow(() -> new ClienteNaoEncontradoException("Cliente não encontrado com o ID: " + id));
+
+        updateClienteComDTO(clienteExistente, clienteUpdateDTO);
+
+        return clienteRepository.save(clienteExistente);
+    }
+
     private void preencherClienteComDTO(Cliente cliente, ClienteDTO clienteDTO) {
         cliente.setNomeCompleto(clienteDTO.getNomeCompleto());
         cliente.setGenero(clienteDTO.getGenero());
@@ -40,5 +49,13 @@ public class ClienteService {
         cliente.setConvenio(clienteDTO.getConvenio());
         cliente.setNumeroCarteiraConvenio(clienteDTO.getNumeroCarteiraConvenio());
         cliente.setValidadeCarteiraConvenio(clienteDTO.getValidadeCarteiraConvenio());
+    }
+
+    private void updateClienteComDTO(Cliente cliente, ClienteUpdateDTO clienteUpdateDTO) {
+
+        cliente.setContatoEmergencia(clienteUpdateDTO.getContatoEmergencia());
+        cliente.setAlergias(clienteUpdateDTO.getAlergias());
+        cliente.setConvenio(clienteUpdateDTO.getConvenio());
+        cliente.setNumeroCarteiraConvenio(clienteUpdateDTO.getNumeroCarteiraConvenio());
     }
 }

@@ -18,6 +18,4 @@ public class ClienteUpdateDTO extends PessoaDTO {
 
     private String numeroCarteiraConvenio;
 
-    private Date validadeCarteiraConvenio;
-
 }
