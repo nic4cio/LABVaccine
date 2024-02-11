@@ -8,11 +8,21 @@ import tech.devinhouse.labvaccine.model.Cliente;
 import tech.devinhouse.labvaccine.model.EstadoCivil;
 import tech.devinhouse.labvaccine.repository.ClienteRepository;
 
+import java.util.List;
+
 @Service
 public class ClienteService {
 
     @Autowired
     private ClienteRepository clienteRepository;
+
+    public List<Cliente> buscarClientesPorNome(String nome) {
+        return clienteRepository.findByNomeCompletoContaining(nome);
+    }
+
+    public List<Cliente> listarClientes() {
+        return clienteRepository.findAll();
+    }
 
     public Cliente cadastrarCliente(ClienteDTO clienteDTO) {
         if (clienteRepository.existsByCpf(clienteDTO.getCpf())) {

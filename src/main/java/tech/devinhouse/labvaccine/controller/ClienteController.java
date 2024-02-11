@@ -11,12 +11,30 @@ import tech.devinhouse.labvaccine.service.ClienteNaoEncontradoException;
 import tech.devinhouse.labvaccine.service.ClienteService;
 import tech.devinhouse.labvaccine.service.CPFJaCadastradoException;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/clientes")
 public class ClienteController {
 
     @Autowired
     private ClienteService clienteService;
+
+    @GetMapping
+    public ResponseEntity<?> listarClientes(@RequestParam(value = "nome", required = false) String nome) {
+        try {
+            List<Cliente> clientes;
+            if (nome != null && !nome.isEmpty()) {
+                clientes = clienteService.buscarClientesPorNome(nome);
+            } else {
+                clientes = clienteService.listarClientes();
+            }
+            return ResponseEntity.ok(clientes);
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao listar clientes: " + ex.getMessage());
+        }
+    }
+
 
     @PostMapping
     public ResponseEntity<?> cadastrarCliente(@RequestBody ClienteDTO clienteDTO) {
