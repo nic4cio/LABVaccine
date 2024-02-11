@@ -4,10 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import tech.devinhouse.labvaccine.dto.NovaSenhaDTO;
 import tech.devinhouse.labvaccine.dto.UsuarioDTO;
 import tech.devinhouse.labvaccine.dto.UsuarioUpdateDTO;
 import tech.devinhouse.labvaccine.model.Usuario;
 import tech.devinhouse.labvaccine.service.CPFJaCadastradoException;
+import tech.devinhouse.labvaccine.service.SenhaInvalidaException;
 import tech.devinhouse.labvaccine.service.UsuarioNaoEncontradoException;
 import tech.devinhouse.labvaccine.service.UsuarioService;
 
@@ -41,4 +43,19 @@ public class UsuarioController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao atualizar usuário: " + ex.getMessage());
         }
     }
+
+    @PutMapping("/{id}/senha")
+    public ResponseEntity<?> atualizarSenhaUsuario(@PathVariable("id") Long id, @RequestBody NovaSenhaDTO novaSenhaDTO) {
+        try {
+            Usuario usuarioAtualizado = usuarioService.atualizarSenhaUsuario(id, novaSenhaDTO);
+            return ResponseEntity.ok(usuarioAtualizado);
+        } catch (UsuarioNaoEncontradoException ex) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+        } catch (SenhaInvalidaException ex) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao atualizar a senha do usuário: " + ex.getMessage());
+        }
+    }
+
 }

@@ -2,6 +2,7 @@ package tech.devinhouse.labvaccine.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tech.devinhouse.labvaccine.dto.NovaSenhaDTO;
 import tech.devinhouse.labvaccine.dto.UsuarioDTO;
 import tech.devinhouse.labvaccine.dto.UsuarioUpdateDTO;
 import tech.devinhouse.labvaccine.model.EstadoCivil;
@@ -49,4 +50,18 @@ public class UsuarioService {
 
         return usuarioRepository.save(usuarioExistente);
     }
+
+    public Usuario atualizarSenhaUsuario(Long id, NovaSenhaDTO novaSenhaDTO) {
+        Usuario usuarioExistente = usuarioRepository.findById(id)
+                .orElseThrow(() -> new UsuarioNaoEncontradoException("Usuário não encontrado com o ID: " + id));
+
+        if (novaSenhaDTO == null || novaSenhaDTO.getNovaSenha() == null || novaSenhaDTO.getNovaSenha().isEmpty()) {
+            throw new SenhaInvalidaException("A nova senha não foi fornecida.");
+        }
+
+        usuarioExistente.setSenha(novaSenhaDTO.getNovaSenha());
+
+        return usuarioRepository.save(usuarioExistente);
+    }
+
 }
