@@ -41,4 +41,18 @@ public class AdministracaoVacinaService {
 
         return administracaoVacinaRepository.save(administracaoVacina);
     }
+
+    public AdministracaoVacina atualizarAdministracaoVacina(Long id, AdministracaoVacinaDTO administracaoVacinaDTO) {
+        AdministracaoVacina administracaoVacina = administracaoVacinaRepository.findById(id)
+                .orElseThrow(() -> new AdministracaoVacinaNaoEncontradaException("Administração de vacina não encontrada com o ID: " + id));
+
+        if (administracaoVacinaDTO.getTipoVacina() == null || administracaoVacinaDTO.getObservacoes() == null) {
+            throw new CamposObrigatoriosNaoFornecidosException("Os campos obrigatórios 'tipoVacina' e 'observacoes' devem ser fornecidos.");
+        }
+
+        administracaoVacina.setTipoVacina(TipoVacina.valueOf(administracaoVacinaDTO.getTipoVacina()));
+        administracaoVacina.setObservacoes(administracaoVacinaDTO.getObservacoes());
+
+        return administracaoVacinaRepository.save(administracaoVacina);
+    }
 }
