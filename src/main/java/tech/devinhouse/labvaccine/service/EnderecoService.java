@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import tech.devinhouse.labvaccine.model.Endereco;
 import tech.devinhouse.labvaccine.repository.EnderecoRepository;
 
+import java.util.List;
+
 @Service
 public class EnderecoService {
 
@@ -13,5 +15,9 @@ public class EnderecoService {
 
     public Endereco cadastrarEndereco(Endereco endereco) {
         return enderecoRepository.save(endereco);
+    }
+
+    public List<Endereco> listarEnderecos() {
+        return enderecoRepository.findAll();
     }
 }
