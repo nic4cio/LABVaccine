@@ -12,6 +12,15 @@ em farmácias.
 - Banco de Dados: PostgreSQL
 - Outras tecnologias: Docker, Insomnia, IntelliJ IDEA, Git e GitHub.
 
+## Como Executar
+
+Para executar o LABVaccine, siga estas etapas:
+
+1. Clone o repositório: `git clone https://github.com/nic4cio/LABVaccine`
+2. Navegue até o diretório do projeto: `cd LABVaccine`
+3. Instale o Docker https://www.docker.com/
+4. Suba o container com o comando docker compose up -d
+5. Execute a classe LabVaccineAplication.java no IntelliJ
 
 ## Melhorias Futuras
 
