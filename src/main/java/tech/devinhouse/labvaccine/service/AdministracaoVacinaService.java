@@ -11,6 +11,9 @@ import tech.devinhouse.labvaccine.repository.AdministracaoVacinaRepository;
 import tech.devinhouse.labvaccine.repository.ClienteRepository;
 import tech.devinhouse.labvaccine.repository.UsuarioRepository;
 
+import javax.swing.text.html.Option;
+import java.util.Optional;
+
 @Service
 public class AdministracaoVacinaService {
 
@@ -54,5 +57,10 @@ public class AdministracaoVacinaService {
         administracaoVacina.setObservacoes(administracaoVacinaDTO.getObservacoes());
 
         return administracaoVacinaRepository.save(administracaoVacina);
+    }
+
+    public AdministracaoVacina getAdministracaoVacinaById(Long id) {
+        Optional<AdministracaoVacina> administracaoVacinaOptional = administracaoVacinaRepository.findById(id);
+        return administracaoVacinaOptional.orElseThrow(() -> new AdministracaoVacinaNaoEncontradaException("Administração de vacina não encontrada com o ID: " + id));
     }
 }

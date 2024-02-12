@@ -30,4 +30,14 @@ public class AdministracaoVacinaController {
 
         return new ResponseEntity<>(administracaoVacinaAtualizada, HttpStatus.OK);
     }
+
+    @GetMapping("/{identificador}")
+    public ResponseEntity<AdministracaoVacina> getAdministracaoVacina(@PathVariable Long identificador) {
+        AdministracaoVacina administracaoVacina = administracaoVacinaService.getAdministracaoVacinaById(identificador);
+        if (administracaoVacina != null) {
+            return ResponseEntity.ok(administracaoVacina);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
