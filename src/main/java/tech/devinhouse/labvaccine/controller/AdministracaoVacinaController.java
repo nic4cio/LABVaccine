@@ -40,4 +40,10 @@ public class AdministracaoVacinaController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @DeleteMapping("/{identificador}")
+    public ResponseEntity<?> excluirAdministracaoVacina(@PathVariable Long identificador) {
+        administracaoVacinaService.excluirAdministracaoVacinaById(identificador);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }

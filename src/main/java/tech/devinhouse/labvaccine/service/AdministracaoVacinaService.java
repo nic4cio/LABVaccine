@@ -63,4 +63,10 @@ public class AdministracaoVacinaService {
         Optional<AdministracaoVacina> administracaoVacinaOptional = administracaoVacinaRepository.findById(id);
         return administracaoVacinaOptional.orElseThrow(() -> new AdministracaoVacinaNaoEncontradaException("Administração de vacina não encontrada com o ID: " + id));
     }
+
+    public void excluirAdministracaoVacinaById(Long id) {
+        Optional<AdministracaoVacina> administracaoVacinaOptional = administracaoVacinaRepository.findById(id);
+        AdministracaoVacina administracaoVacina = administracaoVacinaOptional.orElseThrow(() -> new AdministracaoVacinaNaoEncontradaException("Administração de vacina não encontrada com o ID: " + id));
+        administracaoVacinaRepository.delete(administracaoVacina);
+    }
 }
