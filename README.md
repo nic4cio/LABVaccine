@@ -2,8 +2,7 @@
 
 ## Gestão de administração de vacinas em farmácias
 
-O **LABVaccine** é uma aplicação que resolve o problema de gestão de administração de vacinas
-em farmácias.
+O **LABVaccine** é uma aplicação que foi feita visando resolver o problema da gestão de administração de vacinas em farmácias.
 
 ## Tecnologias Utilizadas
 
